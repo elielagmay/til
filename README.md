@@ -1,2 +1,2 @@
 # til
-TIL
+notes about all the things
