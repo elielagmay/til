@@ -11,7 +11,7 @@ const component = shallow(<MyComponent />)
 expect(component.find('Connect(ChildComponent)')).to.have.length(1)
 ```
 
-### Apollo
+#### Apollo
 
 ```jsx
 const component = shallow(<MyComponent />)
