@@ -4,6 +4,14 @@ I spent a full hour wondering why I can't query a child component when shallow r
 
 Turns out if it's wrapped in a higher order component like Redux's `connect` or Apollo's `graphql`, then it's not possible to query it with just the child component's name.
 
+#### React-Router
+
+```jsx
+const component = shallow(<MyComponent />)
+expect(component.find('withRouter(ChildComponent)')).to.have.length(1)
+```
+
+
 #### Redux
 
 ```jsx
