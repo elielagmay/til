@@ -1,4 +1,4 @@
-### Mocking Django reverse ForeignKey relations in unit tests
+### Mocking Django reverse ForeignKey relationships in unit tests
 
 If we have the following models,
 
