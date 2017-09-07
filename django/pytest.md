@@ -7,7 +7,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
 
-    def comment_count(self):
+    def get_comment_count(self):
         return self.comments.count()
 
 class Comment(models.Model):
@@ -15,7 +15,7 @@ class Comment(models.Model):
     message = models.TextField()
 ```
 
-We can write a unit test for `Post.comment_count` by mocking Django's `ReverseManyToOneDescriptor`.
+We can write a unit test for `Post.get_comment_count` by mocking Django's `ReverseManyToOneDescriptor`.
 
 ```python
 from django.db.models.fields.related import ReverseManyToOneDescriptor
@@ -28,7 +28,7 @@ def test_post_comment_count(mocker):
     mock_get.return_value = mock_queryset
 
     post = Post(title='Test Post')
-    assert post.comment_count == 3
+    assert post.get_comment_count() == 3
 ```
 
 If there are multiple related models, it's not ideal to mock all the relationships. So we can choose when to use the mocked queryset using `side_effect`.
@@ -50,9 +50,9 @@ def test_post_comment_count(mocker):
             return mock_queryset
         return orig_get(*args, **kwargs)
 
-   mock_get.side_effect = side_effect
+    mock_get.side_effect = side_effect
 
-   post = Post(title='Test Post')
-   assert post.comment_count == 3
+    post = Post(title='Test Post')
+    assert post.get_comment_count() == 3
 ```
    
